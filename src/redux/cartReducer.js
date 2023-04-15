@@ -7,7 +7,7 @@ const totalPriceFromStorage = localStorage.getItem("totalPrice")
 
 const initialState = {
   cartItems: cartItemsFromStorage,
-  totalPrice: totalPriceFromStorage
+  totalPrice: totalPriceFromStorage,
 };
 
 const updateLocalStorage = (cartItems, totalPrice) => {
@@ -35,7 +35,7 @@ const addToCart = (state, action) => {
     return {
       ...state,
       cartItems: updatedCartItems,
-      totalPrice: updatedTotalPrice
+      totalPrice: updatedTotalPrice,
     };
   } else {
     const newCartItem = { product, quantity };
@@ -48,7 +48,7 @@ const addToCart = (state, action) => {
     return {
       ...state,
       cartItems: updatedCartItems,
-      totalPrice: updatedTotalPrice
+      totalPrice: updatedTotalPrice,
     };
   }
 };
@@ -77,11 +77,21 @@ const removeFromCart = (state, action) => {
     return {
       ...state,
       cartItems: filteredCartItems,
-      totalPrice: updatedTotalPrice
+      totalPrice: updatedTotalPrice,
     };
   } else {
     return state;
   }
+};
+
+const emptyCart = (state) => {
+  localStorage.removeItem("cartItems");
+  localStorage.removeItem("totalPrice");
+  return {
+    ...state,
+    cartItems: [],
+    totalPrice: 0,
+  };
 };
 
 const updateCart = (state, action) => {
@@ -105,7 +115,7 @@ const updateCart = (state, action) => {
     return {
       ...state,
       cartItems: updatedCartItems,
-      totalPrice: updatedTotalPrice
+      totalPrice: updatedTotalPrice,
     };
   } else {
     return state;
@@ -125,7 +135,7 @@ export const cartReducer = (state = initialState, action) => {
     case "UPDATE_CART":
       return updateCart(state, action);
     case "EMPTY_CART":
-      return { ...state, cartItem: [], totalPrice: 0 };
+      return emptyCart();
     default:
       return state;
   }
