@@ -1,2 +1,2 @@
-# ecommerce-reactjs-app-frontend-version-2
+# ecommerce-app-reactjs-frontend
 Created with CodeSandbox
